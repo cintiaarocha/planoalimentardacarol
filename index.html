@@ -1,1 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Plano Alimentar · Ana Carolina 💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --purple-900:#1A1432;
+  --purple-800:#2D2360;
+  --purple-700:#3D3190;
+  --purple-600:#5346BE;
+  --purple-500:#7B6FD8;
+  --purple-400:#A89FE8;
+  --purple-300:#C8C2F4;
+  --purple-200:#E0DCF9;
+  --purple-100:#F2F0FD;
+  --pink-500:#C9507B;
+  --pink-400:#DC7FA0;
+  --pink-200:#F5D0DF;
+  --pink-100:#FCF0F5;
+  --gold-500:#B8860B;
+  --gold-400:#D4A017;
+  --gold-200:#F5E6B0;
+  --gold-100:#FDF8E7;
+  --teal-500:#0D7A60;
+  --teal-400:#1AA382;
+  --teal-200:#B0E8DA;
+  --teal-100:#E8FAF6;
+  --bg:#0E0B1E;
+  --bg2:#16122A;
+  --bg3:#1E1A35;
+  --card:#211D38;
+  --card2:#2A2545;
+  --border:rgba(123,111,216,0.2);
+  --border2:rgba(123,111,216,0.4);
+  --text:#EDE8FF;
+  --text2:#A89FE8;
+  --text3:#6B6490;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
 
+/* Stars background */
+.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d) ease-in-out infinite var(--delay);}
+@keyframes twinkle{0%,100%{opacity:0.1;}50%{opacity:0.7;}}
+
+.app{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:1.5rem 1rem 3rem;}
+
+/* Header */
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:0.5px solid var(--border);}
+.logo-wrap{display:flex;align-items:center;gap:12px;}
+.logo-badge{width:44px;height:44px;background:var(--purple-700);border:1px solid var(--purple-500);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-badge svg{width:24px;height:24px;fill:var(--purple-300);}
+.logo-title{font-family:'Noto Serif KR',serif;font-size:17px;font-weight:700;color:var(--purple-300);letter-spacing:0.5px;}
+.logo-sub{font-size:12px;color:var(--text3);margin-top:2px;}
+.header-right{text-align:right;}
+.purple-you{font-size:13px;color:var(--purple-400);font-style:italic;letter-spacing:0.3px;}
+.member-dots{display:flex;gap:5px;justify-content:flex-end;margin-top:6px;}
+.dot{width:8px;height:8px;border-radius:50%;}
+
+/* Tabs */
+.tabs{display:flex;gap:6px;margin-bottom:1.5rem;background:var(--bg3);border:0.5px solid var(--border);border-radius:14px;padding:5px;}
+.tab-btn{flex:1;padding:10px 0;font-size:13px;font-weight:500;background:transparent;border:none;cursor:pointer;color:var(--text3);border-radius:10px;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.tab-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.tab-btn.active{background:var(--purple-700);color:var(--purple-200);box-shadow:0 0 0 1px var(--purple-500);}
+.tab-btn:not(.active):hover{background:var(--bg2);color:var(--purple-400);}
+
+/* Section */
+.section{display:none;animation:fadeIn 0.25s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* Shopping list */
+.note-bar{font-size:12px;color:var(--purple-300);background:rgba(83,70,190,0.15);padding:9px 14px;margin-bottom:1.25rem;border-left:2px solid var(--purple-500);border-radius:0 8px 8px 0;}
+.progress-wrap{margin-bottom:1rem;}
+.prog-label{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:5px;}
+.prog-track{width:100%;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden;}
+.prog-fill{height:5px;background:linear-gradient(90deg,var(--purple-600),var(--purple-400));border-radius:3px;transition:width 0.4s ease;}
+.summary{display:flex;gap:8px;margin-bottom:1.25rem;}
+.sum-card{flex:1;background:var(--card);border:0.5px solid var(--border);border-radius:10px;padding:10px 12px;}
+.sum-lbl{font-size:11px;color:var(--text3);margin-bottom:3px;}
+.sum-val{font-size:22px;font-weight:600;color:var(--purple-300);}
+.controls{display:flex;gap:8px;margin-bottom:1.25rem;}
+.search-input{flex:1;padding:9px 14px;font-size:13px;border-radius:10px;border:0.5px solid var(--border);background:var(--card);color:var(--text);font-family:'DM Sans',sans-serif;outline:none;transition:border 0.2s;}
+.search-input::placeholder{color:var(--text3);}
+.search-input:focus{border-color:var(--purple-500);}
+.btn-reset{padding:9px 14px;font-size:12px;border-radius:10px;border:0.5px solid var(--border);background:transparent;color:var(--text3);cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;white-space:nowrap;transition:all 0.2s;}
+.btn-reset:hover{background:rgba(83,70,190,0.2);color:var(--purple-300);}
+
+.cat-block{margin-bottom:1.25rem;}
+.cat-head{display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;margin-bottom:7px;}
+.cat-head .ci{font-size:16px;}
+.cat-head .ct{font-size:13px;font-weight:500;}
+.cat-head .cc{font-size:11px;margin-left:auto;padding:2px 9px;border-radius:20px;}
+.items-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px;}
+@media(max-width:560px){.items-grid{grid-template-columns:1fr;}}
+.item{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--card);border:0.5px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color 0.15s,opacity 0.2s;}
+.item:hover{border-color:var(--purple-500);}
+.item.done{opacity:0.5;}
+.item.done .iname{text-decoration:line-through;color:var(--text3);}
+.iname{font-size:12px;color:var(--text);}
+.iqty{font-size:11px;font-weight:500;padding:2px 8px;border-radius:20px;white-space:nowrap;margin-left:6px;flex-shrink:0;}
+
+/* Meal plan */
+.dias-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:1.25rem;}
+.dia-btn{padding:10px 4px;border-radius:10px;border:0.5px solid var(--border);background:var(--card);cursor:pointer;text-align:center;transition:all 0.2s;font-family:'DM Sans',sans-serif;}
+.dia-btn:hover{border-color:var(--purple-500);background:var(--card2);}
+.dia-btn.sel{background:var(--purple-700);border-color:var(--purple-500);}
+.dia-btn .dn{font-size:13px;font-weight:500;color:var(--text2);}
+.dia-btn.sel .dn{color:var(--purple-200);}
+.dia-btn .de{font-size:16px;display:block;margin-bottom:3px;}
+
+.placeholder{text-align:center;padding:2.5rem;color:var(--text3);font-size:13px;}
+.placeholder .ph-icon{font-size:32px;display:block;margin-bottom:10px;}
+
+.day-title{font-family:'Noto Serif KR',serif;font-size:16px;color:var(--purple-300);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+.day-title span{width:28px;height:28px;background:var(--purple-700);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;}
+
+.meal-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:700px){.meal-cards{grid-template-columns:1fr 1fr;}}@media(max-width:480px){.meal-cards{grid-template-columns:1fr;}}
+.mc{background:var(--card);border:0.5px solid var(--border);border-radius:12px;padding:14px;transition:border-color 0.2s;}
+.mc:hover{border-color:var(--border2);}
+.mc-top-bar{height:3px;border-radius:2px;margin-bottom:10px;}
+.mc-label{font-size:10px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;margin-bottom:5px;}
+.mc-hora{font-size:10px;color:var(--text3);margin-bottom:8px;}
+.mc-title{font-size:12px;font-weight:500;color:var(--text);line-height:1.5;margin-bottom:10px;}
+.mc-divider{height:0.5px;background:var(--border);margin-bottom:8px;}
+.mc-prep-lbl{font-size:10px;font-weight:600;letter-spacing:0.6px;text-transform:uppercase;margin-bottom:5px;}
+.mc-prep{font-size:11px;color:var(--text2);line-height:1.6;}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="app">
+  <header class="header">
+    <div class="logo-wrap">
+      <div class="logo-badge">
+        <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" fill="none">
+          <!-- Left trapezoid: wide bottom-left, narrow top-left -->
+          <polygon points="4,40 16,40 19,4 9,4" fill="#C8C2F4"/>
+          <!-- Right trapezoid: mirror -->
+          <polygon points="40,40 28,40 25,4 35,4" fill="#C8C2F4"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-title">Plano Alimentar · Ana Carolina</div>
+        <div class="logo-sub">Nutricionista Joziane Morais</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="purple-you">I purple you 💜</div>
+      <div class="member-dots">
+        <div class="dot" style="background:#FF9AA2;" title="Jin"></div>
+        <div class="dot" style="background:#FFB7B2;" title="Suga"></div>
+        <div class="dot" style="background:#FFDAC1;" title="J-Hope"></div>
+        <div class="dot" style="background:#E2F0CB;" title="RM"></div>
+        <div class="dot" style="background:#B5EAD7;" title="Jimin"></div>
+        <div class="dot" style="background:#C7CEEA;" title="V"></div>
+        <div class="dot" style="background:#9B8EC4;" title="Jungkook"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-compras" onclick="switchTab('compras')">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      Lista de compras
+    </button>
+    <button class="tab-btn" id="tab-cardapio" onclick="switchTab('cardapio')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Cardápio semanal
+    </button>
+  </div>
+
+  <div class="section active" id="sec-compras">
+    <div class="note-bar">Quantidades estimadas para 30 dias. Clique nos itens para marcar o que já foi comprado.</div>
+    <div class="progress-wrap">
+      <div class="prog-label"><span id="prog-text">0 itens marcados</span><span id="prog-pct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="c-prog" style="width:0%"></div></div>
+    </div>
+    <div class="summary">
+      <div class="sum-card"><div class="sum-lbl">Total de itens</div><div class="sum-val" id="c-total">0</div></div>
+      <div class="sum-card"><div class="sum-lbl">Marcados</div><div class="sum-val" id="c-checked">0</div></div>
+      <div class="sum-card"><div class="sum-lbl">Categorias</div><div class="sum-val">9</div></div>
+    </div>
+    <div class="controls">
+      <input class="search-input" type="text" placeholder="🔍  Buscar item..." id="c-search" oninput="renderCompras()"/>
+      <button class="btn-reset" onclick="resetCompras()">↺ Limpar tudo</button>
+    </div>
+    <div id="c-cats"></div>
+  </div>
+
+  <div class="section" id="sec-cardapio">
+    <div class="note-bar">Selecione um dia da semana para ver as refeições e dicas de preparo para sua mãe.</div>
+    <div class="dias-grid" id="dias-grid"></div>
+    <div id="meal-area">
+      <div class="placeholder">
+        <span class="ph-icon">🎵</span>
+        Selecione um dia acima para ver o cardápio
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Stars
+(function(){
+  const c=document.getElementById('stars');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const size=Math.random()*2.5+0.5;
+    s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${2+Math.random()*4}s;--delay:-${Math.random()*4}s;opacity:${Math.random()*0.5+0.1}`;
+    c.appendChild(s);
+  }
+})();
+
+const CATS = [
+  {cat:"Proteínas",emoji:"🥚",bg:"rgba(201,80,123,0.12)",tc:"#DC7FA0",bc:"rgba(201,80,123,0.25)",tct:"#F5D0DF",items:[
+    {n:"Ovos de galinha",q:"~60 unidades"},
+    {n:"Whey protein",q:"~900 g"},
+    {n:"Queijo ricota",q:"~2,1 kg"},
+    {n:"Requeijão light",q:"~900 g"},
+  ]},
+  {cat:"Proteínas vegetais",emoji:"🌱",bg:"rgba(13,122,96,0.12)",tc:"#1AA382",bc:"rgba(13,122,96,0.25)",tct:"#B0E8DA",items:[
+    {n:"Hambúrguer de grão de bico",q:"~20 porções"},
+    {n:"Hambúrguer de soja",q:"~20 unidades"},
+    {n:"Proteína de soja orgânica",q:"~2,4 kg"},
+  ]},
+  {cat:"Carboidratos",emoji:"🍞",bg:"rgba(184,134,11,0.12)",tc:"#D4A017",bc:"rgba(184,134,11,0.25)",tct:"#F5E6B0",items:[
+    {n:"Pão francês de trigo",q:"~60 und"},
+    {n:"Pão de forma integral",q:"~1,5 kg"},
+    {n:"Tapioca de goma",q:"~1,5 kg"},
+    {n:"Rap 10",q:"~1,68 kg"},
+    {n:"Arroz branco",q:"~3 kg"},
+    {n:"Arroz integral",q:"~3 kg"},
+    {n:"Batata-inglesa",q:"~5,4 kg"},
+    {n:"Batata doce",q:"~8,4 kg"},
+    {n:"Purê de batata",q:"~4 kg"},
+  ]},
+  {cat:"Leguminosas",emoji:"🫘",bg:"rgba(13,122,96,0.1)",tc:"#1AA382",bc:"rgba(13,122,96,0.22)",tct:"#B0E8DA",items:[
+    {n:"Feijão carioca",q:"~1,8 kg"},
+    {n:"Grão de bico",q:"~1,5 kg"},
+  ]},
+  {cat:"Frutas",emoji:"🍓",bg:"rgba(201,80,123,0.1)",tc:"#DC7FA0",bc:"rgba(201,80,123,0.22)",tct:"#F5D0DF",items:[
+    {n:"Manga",q:"~3 kg"},{n:"Maçã",q:"~4,5 kg"},
+    {n:"Banana prata",q:"~1,2 kg"},{n:"Morango",q:"~4,8 kg"},
+    {n:"Abacate",q:"~2,7 kg"},{n:"Melancia",q:"~11 kg"},
+    {n:"Melão",q:"~7 kg"},{n:"Uva",q:"~1,44 kg"},
+    {n:"Pera",q:"~3,3 kg"},
+  ]},
+  {cat:"Verduras e legumes",emoji:"🥦",bg:"rgba(99,153,34,0.12)",tc:"#7DB52A",bc:"rgba(99,153,34,0.25)",tct:"#D4EDAA",items:[
+    {n:"Alface crespa",q:"~2,4 kg"},{n:"Rúcula",q:"~1,8 kg"},
+    {n:"Repolho",q:"~1,2 kg"},{n:"Acelga",q:"~600 g"},
+    {n:"Abobrinha",q:"~2,7 kg"},{n:"Cenoura",q:"~3 kg"},
+    {n:"Beterraba",q:"~2,4 kg"},{n:"Brócolis",q:"~1,5 kg"},
+    {n:"Couve-flor",q:"~4,5 kg"},{n:"Tomate",q:"~1 kg"},
+    {n:"Cebola",q:"~1 kg"},
+  ]},
+  {cat:"Óleos e sementes",emoji:"🫙",bg:"rgba(83,70,190,0.12)",tc:"#A89FE8",bc:"rgba(83,70,190,0.25)",tct:"#C8C2F4",items:[
+    {n:"Azeite de oliva extra virgem",q:"~480 ml"},
+    {n:"Semente de linhaça",q:"~600 g"},
+    {n:"Granola",q:"~330 g"},
+    {n:"Aveia em flocos",q:"~450 g"},
+  ]},
+  {cat:"Bebidas",emoji:"🧃",bg:"rgba(83,70,190,0.1)",tc:"#9B8FDE",bc:"rgba(83,70,190,0.2)",tct:"#C8C2F4",items:[
+    {n:"Suco de fruta integral/polpa",q:"~7,2 L"},
+    {n:"Chá sachê ou granel",q:"~60 sachês"},
+  ]},
+  {cat:"Temperos e outros",emoji:"🧄",bg:"rgba(168,159,232,0.08)",tc:"#8880C4",bc:"rgba(168,159,232,0.2)",tct:"#C8C2F4",items:[
+    {n:"Açafrão cúrcuma",q:"~30 g"},{n:"Sal",q:"~300 g"},
+    {n:"Pimenta do reino",q:"~60 g"},{n:"Alho",q:"~270 g"},
+    {n:"Cebolinha",q:"~1 maço/mês"},{n:"Salsinha",q:"~1 maço/mês"},
+    {n:"Farinha de trigo",q:"~1,9 kg"},
+  ]},
+];
+
+const DIAS = ["Seg","Ter","Qua","Qui","Sex","Sáb","Dom"];
+const DIAS_FULL = ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira","Sábado","Domingo"];
+const EMOJIS = ["🌙","⭐","🎵","🌸","💜","✨","🎶"];
+
+const CARDAPIO = [
+  {cafe:{t:"Tapioca + ovos mexidos + suco",p:"Umedeça 50g de goma de tapioca e espalhe em frigideira antiaderente. Recheie com 2 ovos mexidos temperados. Sirva com 1 copo de suco natural."},almoco:{t:"Arroz + feijão + hambúrguer de grão de bico + alface + cenoura cozida + azeite e linhaça",p:"Prepare o hambúrguer de grão de bico (deixar de molho na véspera). Cozinhe o arroz e o feijão. Sirva com alface crua, cenoura cozida e regue com azeite e linhaça."},lanche:{t:"Manga + whey protein + aveia em flocos",p:"Pique 100g de manga. Misture 1 dosador de whey com água. Sirva junto com 1 colher de aveia em flocos."}},
+  {cafe:{t:"Pão integral + ricota + chá",p:"Toste 2 fatias de pão integral. Espalhe 70g de ricota. Sirva com 1 copo de chá sem açúcar."},almoco:{t:"Arroz integral + feijão + ovo cozido + rúcula + beterraba ralada + azeite",p:"Cozinhe o arroz integral com mais água (demora mais). Cozinhe 2 ovos. Rale a beterraba cozida. Sirva com rúcula, azeite e linhaça."},lanche:{t:"Maçã + linhaça + whey protein",p:"Fatie 1 maçã média. Prepare o shake de whey com água gelada. Sirva a maçã com 1 colher de linhaça e o shake ao lado."}},
+  {cafe:{t:"Rap 10 + requeijão light + suco natural",p:"Aqueça 2 porções de Rap 10 em frigideira. Espalhe 30g de requeijão light. Sirva com 1 copo de suco natural."},almoco:{t:"Batata doce assada + hambúrguer de soja + acelga refogada + azeite",p:"Asse 3 fatias de batata doce a 200°C por 25 min. Prepare o hambúrguer de soja. Refogue a acelga com azeite e alho rapidamente."},lanche:{t:"Morango + granola + whey protein",p:"Lave e corte 8 morangos grandes. Monte: morango + whey diluído + 1 colher de granola por cima."}},
+  {cafe:{t:"Tapioca + ovos cozidos + suco natural",p:"Prepare a tapioca com 50g de goma em frigideira seca. Sirva com 2 ovos cozidos fatiados e 1 copo de suco natural."},almoco:{t:"Arroz + feijão + proteína de soja + couve-flor cozida + azeite",p:"Hidrate e refogue a soja com cebola, alho e temperos. Cozinhe a couve-flor no vapor por 10 min. Monte e regue com azeite."},lanche:{t:"Abacate amassado + linhaça + whey",p:"Amasse 2 colheres de abacate. Misture com o whey protein. Finalize com semente de linhaça por cima."}},
+  {cafe:{t:"Pão francês + ricota + chá",p:"Sirva 1 pão francês (50g) com 2 fatias de ricota média. Acompanhe com 1 copo de chá. Pode tostar levemente o pão."},almoco:{t:"Purê de batata + ovo frito + brócolis no vapor + alface + azeite",p:"Cozinhe e amasse a batata-inglesa com azeite e sal. Cozinhe o brócolis no vapor por 8 min. Frite 2 ovos. Sirva com alface crua."},lanche:{t:"Banana + whey + aveia em flocos",p:"Amasse meia banana prata pequena. Misture com 1 dosador de whey e 1 colher de aveia. Fica como uma pasta cremosa ou vitamina."}},
+  {cafe:{t:"Tapioca + ovos mexidos + suco natural",p:"Prepare a tapioca com 50g de goma. Recheie com 2 ovos mexidos temperados. Sirva com 1 copo de suco natural."},almoco:{t:"Batata doce cozida + hambúrguer de grão de bico + abobrinha refogada + azeite",p:"Cozinhe a batata doce em cubos. Refogue 90g de abobrinha fatiada com azeite e sal. Aqueça o hambúrguer na frigideira. Regue com linhaça."},lanche:{t:"Manga + granola + whey protein",p:"Pique 100g de manga em cubos. Prepare o whey com água. Sirva com 1 colher de granola por cima."}},
+  {cafe:{t:"Rap 10 + requeijão light + suco natural",p:"Aqueça o Rap 10 na frigideira. Passe 30g de requeijão light. Sirva com 1 copo de suco natural."},almoco:{t:"Arroz integral + feijão + proteína de soja + repolho ralado + cenoura crua + azeite",p:"Refogue a soja com temperos. Rale repolho e cenoura crua para a salada. Tempere com azeite, limão e sal. Sirva com arroz integral."},lanche:{t:"Uva + linhaça + whey protein",p:"Separe 6 uvas médias. Misture o whey com água gelada. Sirva as uvas com 1 colher de linhaça e o shake ao lado."}},
+];
+
+const JANTAR = [
+  {t:"Omelete de cenoura + salada de alface + azeite",p:"Aproveite a cenoura cozida do almoço: amasse levemente e misture com 2 ovos batidos. Faça um omelete fininho na frigideira antiaderente com um fio de azeite. Sirva com alface crua temperada com limão. Sem carboidrato, leve e rápido!"},
+  {t:"Salada de rúcula com beterraba + ovo cozido + azeite e linhaça",p:"Aproveite a beterraba cozida e ralada do almoço. Monte uma salada com rúcula fresca, beterraba e 1 ovo cozido fatiado. Regue com azeite, limão e 1 colher de linhaça. Sem carboidrato — jantar pronto em 5 minutos!"},
+  {t:"Ovo mexido + acelga refogada (sobra do almoço)",p:"Aproveite a acelga refogada do almoço — reaquece em 2 minutos na frigideira. Prepare 2 ovos mexidos fresquinhos com sal e pimenta. Jantar proteico, leve e sem carboidrato em menos de 10 minutos!"},
+  {t:"Creme leve de couve-flor + soja refogada (sobra do almoço)",p:"Bata a couve-flor cozida do almoço com um fio de azeite, sal e um pouquinho de água quente até virar um creme. Sirva com uma pequena porção da soja refogada que sobrou. Leve, quente e sem carboidrato."},
+  {t:"Sopa de brócolis com ovo (sobra do almoço)",p:"Aproveite o brócolis cozido do almoço. Bata metade com água e temperos para fazer um caldo verde leve. Deixe os florets restantes inteiros na sopa. Quebre 1 ovo dentro do caldo quente e mexa. Reconfortante e sem carboidrato!"},
+  {t:"Ovo mexido + abobrinha refogada + salada de folhas (sobra do almoço)",p:"Aproveite a abobrinha refogada do almoço — reaquece rapidamente. Prepare 2 ovos mexidos. Sirva com folhas de alface ou rúcula temperadas com azeite e limão. Jantar leve, colorido e sem carboidrato!"},
+  {t:"Salada de repolho e cenoura + ovo cozido + azeite (sobra do almoço)",p:"Aproveite o repolho ralado e a cenoura crua do almoço. Monte uma salada fresca com 1 ovo cozido fatiado por cima. Tempere com azeite, limão e sal. Leve, crocante e sem carboidrato — ideal para o fim do dia!"},
+];
+
+const MEAL_CFG = {
+  cafe:{label:"Café da manhã",hora:"09:00",color:"#D4A017",colorL:"rgba(184,134,11,0.15)",colorB:"rgba(212,160,23,0.35)"},
+  almoco:{label:"Almoço",hora:"12:00",color:"#1AA382",colorL:"rgba(13,122,96,0.15)",colorB:"rgba(26,163,130,0.35)"},
+  lanche:{label:"Lanche da tarde",hora:"16:00",color:"#A89FE8",colorL:"rgba(83,70,190,0.15)",colorB:"rgba(168,159,232,0.35)"},
+  jantar:{label:"Jantar",hora:"",color:"#DC7FA0",colorL:"rgba(201,80,123,0.15)",colorB:"rgba(220,127,160,0.35)"},
+};
+
+let checked = new Set();
+let activeDay = null;
+
+function switchTab(t){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('sec-'+t).classList.add('active');
+}
+
+function totalItems(){return CATS.reduce((a,c)=>a+c.items.length,0);}
+
+function renderCompras(){
+  const f=(document.getElementById('c-search').value||'').toLowerCase();
+  const total=totalItems();
+  document.getElementById('c-total').textContent=total;
+  document.getElementById('c-checked').textContent=checked.size;
+  const pct=Math.round(checked.size/total*100);
+  document.getElementById('c-prog').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('prog-text').textContent=checked.size+' de '+total+' itens marcados';
+  const el=document.getElementById('c-cats');el.innerHTML='';
+  CATS.forEach(cat=>{
+    const items=cat.items.filter(i=>i.n.toLowerCase().includes(f));
+    if(!items.length)return;
+    const d=document.createElement('div');d.className='cat-block';
+    const h=document.createElement('div');h.className='cat-head';h.style.background=cat.bg;
+    h.innerHTML=`<span class="ci">${cat.emoji}</span><span class="ct" style="color:${cat.tc}">${cat.cat}</span><span class="cc" style="background:${cat.bc};color:${cat.tct}">${items.length} itens</span>`;
+    const g=document.createElement('div');g.className='items-grid';
+    items.forEach(item=>{
+      const k=cat.cat+':'+item.n;
+      const e=document.createElement('div');e.className='item'+(checked.has(k)?' done':'');
+      e.innerHTML=`<span class="iname">${item.n}</span><span class="iqty" style="background:${cat.bc};color:${cat.tct}">${item.q}</span>`;
+      e.onclick=()=>{checked.has(k)?checked.delete(k):checked.add(k);renderCompras();};
+      g.appendChild(e);
+    });
+    d.appendChild(h);d.appendChild(g);el.appendChild(d);
+  });
+}
+
+function resetCompras(){checked.clear();document.getElementById('c-search').value='';renderCompras();}
+
+function renderDias(){
+  const el=document.getElementById('dias-grid');
+  el.innerHTML=DIAS.map((d,i)=>`
+    <button class="dia-btn${activeDay===i?' sel':''}" onclick="selectDay(${i})">
+      <span class="de">${EMOJIS[i]}</span>
+      <span class="dn">${d}</span>
+    </button>`).join('');
+}
+
+function selectDay(i){
+  activeDay=i;renderDias();
+  const day=CARDAPIO[i];
+  const jantarDay={jantar:{t:JANTAR[i].t,p:JANTAR[i].p}};
+  const fullDay={...day,...jantarDay};
+  const el=document.getElementById('meal-area');
+  el.innerHTML=`
+    <div class="day-title"><span>${EMOJIS[i]}</span>${DIAS_FULL[i]}</div>
+    <div class="meal-cards">
+      ${['cafe','almoco','lanche','jantar'].map(k=>{
+        const m=MEAL_CFG[k];const dm=fullDay[k];
+        return `<div class="mc" style="background:${m.colorL};border-color:${m.colorB}">
+          <div class="mc-top-bar" style="background:${m.color}"></div>
+          <div class="mc-label" style="color:${m.color}">${m.label}</div>
+          ${m.hora ? `<div class="mc-hora" style="color:${m.color};opacity:0.7">${m.hora}</div>` : ""}
+          <div class="mc-title">${dm.t}</div>
+          <div class="mc-divider"></div>
+          <div class="mc-prep-lbl" style="color:${m.color}">Como preparar</div>
+          <div class="mc-prep">${dm.p}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+}
+
+renderCompras();
+renderDias();
+</script>
+</body>
+</html>
